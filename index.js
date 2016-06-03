@@ -9,6 +9,10 @@ app.get('/sato', function(req, res){
 	res.send('Sato page');
 	res.end();
 });
+app.get('/github', function(req,res){
+	res.send('GithubPage here');
+	res.end();
+});
 app.listen(port,function(){
 	console.log('server listenning to port 8080');
 });
