@@ -1,18 +1,19 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 8080;
+const 	express = require('express'),
+	app = express(),
+	port = process.env.PORT || 8080;
+
 app.get('/',(req,res)=>{
 	res.send('Hello');
 	res.end();
 });
-app.get('/sato', function(req, res){
+app.get('/sato',(req, res)=>{
 	res.send('Sato page');
 	res.end();
 });
-app.get('/github', function(req,res){
+app.get('/github', (req,res)=>{
 	res.send('GithubPage here');
 	res.end();
 });
-app.listen(port,function(){
+app.listen(port,()=>{
 	console.log('server listenning to port'+ port);
 });
