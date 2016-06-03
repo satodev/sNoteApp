@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
-app.get('/', function(req,res){
+app.get('/',(req,res)=>{
 	res.send('Hello');
 	res.end();
 });
@@ -14,5 +14,5 @@ app.get('/github', function(req,res){
 	res.end();
 });
 app.listen(port,function(){
-	console.log('server listenning to port 8080');
+	console.log('server listenning to port'+ port);
 });

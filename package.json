@@ -14,6 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "pug": "^2.0.0-beta2"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "engines": {
+	"node": "6.2.0"
   }
 }
