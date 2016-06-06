@@ -23,6 +23,7 @@ routes.get('/notes', (req,res)=>{
 	myNote.save((err,note)=>{
 		if(err) console.log(err);
 		console.log(note);
+		disconnect();
 	});
 	res.send('ok');	
 });
