@@ -8,23 +8,43 @@ html(ng-app="snoteapp", lang="en")
 		link(href="/node_modules/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
 		link(href="/views/css/style.css", rel="stylesheet")
 body(ng-controller="sna_ctrl")
-	h1 Notes 
+	nav.navbar.navbar-light.bg-faded
+			a.navbar-brand(href="#") Responseivle
+			button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2')  &#9776;
+
+			div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
+				a.navbar-brand(href='#') Responsive navbar
+				ul.nav.navbar-nav
+					li.nav-item.active
+						a.nav-link(href='#')
+							| Home 
+							span.sr-only (current)
+					|       
+					li.nav-item
+						a.nav-link(href='#') Features
+					|       
+					li.nav-item
+						a.nav-link(href='#') Pricing
+					|       
+					li.nav-item
+						a.nav-link(href='#') About
+
+	h1 Get All the notes
+	input(type="search", ng-model="data")
+	a(class="btn btn-primary", ng-click="get()") Click me to get notes
+	ul
+		li(ng-repeat="i in obj | filter : data")
+			span(style="display:none", class="objId") {{i._id}}
+			h1 {{i.title}}
+			p {{i.text}}
+			button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
+			div(ng-show="showData")
+				form(class="form-horizontal", role="form")
+					input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
+					input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
+				a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
+			button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
 	div
-		h1 Get All the notes
-		a(class="btn btn-primary", ng-click="get()") Click me to get notes
-		ul
-			li(ng-repeat="i in obj")
-				span(style="display:none", class="objId") {{i._id}}
-				h1 {{i.title}}
-				p {{i.text}}
-				button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
-				div(ng-show="showData")
-					form(class="form-horizontal", role="form")
-						input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
-						input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
-					a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
-				button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
-	div 
 		h1 Post a notes
 		input(ng-model="ptitle", type="text", placeholder="title") 
 		input(ng-model="ptext", type="text", placeholder="text")
