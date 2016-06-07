@@ -12,6 +12,29 @@ body(ng-controller="sna_ctrl")
 	
 	div
 		p {{1+1}}
+	div
+		h1 Get All the notes
+		div(ng-click="get()") Click me to get notes
+		ul
+			li(ng-repeat="i in obj.data")
+				span(style="display:none") {{i._id}}
+				h1 {{i.title}}
+				p {{i.text}}
+				a(href="#", ng-click="update(i._id, i.title, i.text)") Edit The post
+				br 
+				a(href="#", ng-click="remove(i._id)") Delete Post
+	div 
+		h1 Post a notes
+		input(ng-model="ptitle", type="text", placeholder="title")
+		input(ng-model="ptext", type="text", placeholder="text")
+		div(ng-click="post(ptitle, ptext)") Click me to Post notes
+	div 
+		h1 Update a notes
+		div(ng-click="update()") Click me to update notes
+	div 
+		h1 Delete a note
+		div(ng-click="delete()") Click me to delete notes
+
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 	script(src="/node_modules/bootstrap/dist/js/bootstrap.js")
 	script(src="/node_modules/angular/angular.js")

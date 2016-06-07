@@ -1,11 +1,7 @@
 var dataobj = angular.module('dataobj', []);
 dataobj.factory('dataobj', ['$http', ($http)=>{
 	var get = ()=>{
-		$http.get('/notes').then((data)=>{
-			console.log(data);	
-		},(response)=>{
-			console.log('Error, while $http.get');
-		});
+		return $http.get('/notes');
 	};
 	var post = (title, text)=>{
 		var sendObj = {
@@ -27,15 +23,15 @@ dataobj.factory('dataobj', ['$http', ($http)=>{
 		$http.put('/notes', sendObj).then((data)=>{
 			console.log(data);
 		}, (response)=>{
-
+			console.log('update went wrong : '+ response);
 		});
 	};
 	var remove = (id)=>{
-		$http.delete('/notes', id).then((data)=>{
-			
-		},(response)=>{
-
-		});
+		var sendObj = {
+			id: id
+		};
+		console.log(sendObj);
+		return $http.delete('/notes',sendObj);
 	};
 	return {
 		get : get,

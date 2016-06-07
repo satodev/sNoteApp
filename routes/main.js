@@ -5,17 +5,22 @@ const 	express = require('express'),
 	user = 'sato',
 	pwd = 'sato',
 	mongoDbURL = 'mongodb://'+user+':'+pwd+'@ds011442.mlab.com:11442/mlab';
-let connect = ()=>{
-	mg.connect(mongoDbURL);
-}
-let disconnect = ()=>{
-	mg.connection.close();
-}
+
 routes.get('/', (req, res)=>{
 	res.render('index');
 });
 routes.get('/notes', (req,res)=>{
-	connect();
+	mg.connect(mongoDbURL);
+	db.find((err, notes)=>{
+		if(err) console.log(err);
+		console.log(notes);		
+		res.send(notes);
+		mg.connection.close();	
+	});
+});
+routes.post('/notes', (req,res)=>{
+	console.log(req.body.title, req.body.text);
+	mg.connect(mongoDbURL);
 	myNote = new db({
 		title : req.body.title,
 		text: req.body.text
@@ -23,12 +28,8 @@ routes.get('/notes', (req,res)=>{
 	myNote.save((err,note)=>{
 		if(err) console.log(err);
 		console.log(note);
-		disconnect();
+		mg.connection.close();
 	});
-	res.send('ok');	
-});
-routes.post('/notes', (req,res)=>{
-	console.log(req.body.title, req.body.text);
 	res.send({title: req.body.title, text: req.body.text});
 });
 routes.put('/notes', (req,res)=>{
@@ -36,7 +37,7 @@ routes.put('/notes', (req,res)=>{
 	res.send('update');
 });
 routes.delete('/notes', (req,res)=>{
-	console.log('delete' + req.body.id);
+	console.log(req.body); //pourquoi -> req.body == {}; ?
 	res.send('deleted');
 });
 module.exports = routes;
