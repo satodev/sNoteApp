@@ -8,32 +8,27 @@ html(ng-app="snoteapp", lang="en")
 		link(href="/node_modules/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
 		link(href="/views/css/style.css", rel="stylesheet")
 body(ng-controller="sna_ctrl")
-	h1 Hello
-	
-	div
-		p {{1+1}}
+	h1 Notes 
 	div
 		h1 Get All the notes
-		div(ng-click="get()") Click me to get notes
+		a(class="btn btn-primary", ng-click="get()") Click me to get notes
 		ul
-			li(ng-repeat="i in obj.data")
-				span(style="display:none") {{i._id}}
+			li(ng-repeat="i in obj")
+				span(style="display:none", class="objId") {{i._id}}
 				h1 {{i.title}}
 				p {{i.text}}
-				a(href="#", ng-click="update(i._id, i.title, i.text)") Edit The post
-				br 
-				a(href="#", ng-click="remove(i._id)") Delete Post
+				button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
+				div(ng-show="showData")
+					form(class="form-horizontal", role="form")
+						input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
+						input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
+					a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
+				button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
 	div 
 		h1 Post a notes
-		input(ng-model="ptitle", type="text", placeholder="title")
+		input(ng-model="ptitle", type="text", placeholder="title") 
 		input(ng-model="ptext", type="text", placeholder="text")
-		div(ng-click="post(ptitle, ptext)") Click me to Post notes
-	div 
-		h1 Update a notes
-		div(ng-click="update()") Click me to update notes
-	div 
-		h1 Delete a note
-		div(ng-click="delete()") Click me to delete notes
+		button(type="button", class="btn btn-primary", ng-click="post(ptitle, ptext)") Click me to Post notes
 
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 	script(src="/node_modules/bootstrap/dist/js/bootstrap.js")

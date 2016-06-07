@@ -13,13 +13,11 @@ routes.get('/notes', (req,res)=>{
 	mg.connect(mongoDbURL);
 	db.find((err, notes)=>{
 		if(err) console.log(err);
-		console.log(notes);		
 		res.send(notes);
 		mg.connection.close();	
 	});
 });
 routes.post('/notes', (req,res)=>{
-	console.log(req.body.title, req.body.text);
 	mg.connect(mongoDbURL);
 	myNote = new db({
 		title : req.body.title,
@@ -27,17 +25,34 @@ routes.post('/notes', (req,res)=>{
 	});
 	myNote.save((err,note)=>{
 		if(err) console.log(err);
-		console.log(note);
+		res.send({title: req.body.title, text: req.body.text});
 		mg.connection.close();
 	});
-	res.send({title: req.body.title, text: req.body.text});
 });
 routes.put('/notes', (req,res)=>{
-	console.log('update'+ req.body.id + ' ' + req.body.title);
-	res.send('update');
+	if(req.body.id && req.body.title && req.body.text){
+		mg.connect(mongoDbURL);
+		db.findById(req.body.id, (err, notes)=>{
+			if(err) console.log(err);
+			notes.title = req.body.title;
+			notes.text = req.body.text;
+			notes.save((err)=>{
+				if(err) console.log(err);
+				res.send(notes);
+				mg.connection.close();
+			});
+		});	
+	}else{
+		res.send('no update done');
+	}
 });
-routes.delete('/notes', (req,res)=>{
-	console.log(req.body); //pourquoi -> req.body == {}; ?
+routes.delete('/notes/:id', (req,res)=>{
+	mg.connect(mongoDbURL);
+	db.findById(req.params.id,(err,notes)=>{
+		if(err) console.log(err);
+		notes.remove();
+		mg.connection.close();
+	});
 	res.send('deleted');
 });
 module.exports = routes;
