@@ -1,6 +1,9 @@
 let app = angular.module('snoteapp', ['dataobj']);
 app.controller('sna_ctrl', ['dataobj', '$scope',(dataobj, $scope)=>{
 	$scope.obj = [];
+	$(document).ready(()=>{
+		$scope.get();
+	});
 	$scope.pushObj = (arg)=>{
 		$scope.obj.push(arg);
 	};

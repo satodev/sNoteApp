@@ -1,35 +1,23 @@
 doctype html
 html(ng-app="snoteapp", lang="en")
 	head
-		title Hello
+		title sNoteApp
 		meta(charset="utf-8")
 		meta(http-equiv="X-UA-Compatible", content="IE=edge")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
 		link(href="/node_modules/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
 		link(href="/views/css/style.css", rel="stylesheet")
 body(ng-controller="sna_ctrl")
-	nav.navbar.navbar-light.bg-faded
+	nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
 			button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2')  
-				| &#9776; Notes
+				| &#9776; sNoteApp
 			div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
-				a.navbar-brand.hidden-xs(href='#') Notes
-				ul.nav.navbar-nav
-					li.nav-item.active
-						a.nav-link(href='#')
-							| Home 
-							span.sr-only (current)
-					|       
-					li.nav-item
-						a.nav-link(href='#') Features
-					|       
-					li.nav-item
-						a.nav-link(href='#') Pricing
-					|       
-					li.nav-item
-						a.nav-link(href='#') About
+				a.navbar-brand(class="row responsive-utilities-test visible-on", href='#') 
+					span.hidden-xs-down.not-visible sNoteApp
+				form.form-inline.pull-xs-left
+					input.form-control(type='search', placeholder='Search in notes', ng-model="data")
 
 	h1 Get All the notes
-	input(type="search", ng-model="data")
 	a(class="btn btn-primary", ng-click="get()") Click me to get notes
 	ul
 		li(ng-repeat="i in obj | filter : data")
@@ -50,6 +38,7 @@ body(ng-controller="sna_ctrl")
 		button(type="button", class="btn btn-primary", ng-click="post(ptitle, ptext)") Click me to Post notes
 
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+	script(src="/node_modules/tether/dist/js/tether.js")
 	script(src="/node_modules/bootstrap/dist/js/bootstrap.js")
 	script(src="/node_modules/angular/angular.js")
 	script(src="/views/js/snoteapp.js")
