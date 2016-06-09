@@ -1,19 +1,36 @@
-html,body{
+*::selection{
+	background-color: #d9534f;
 }
 body{
-	padding-top: 55px;
+	padding-top: 70px;
 }
 nav{
 	text-align: center;
-	border-top :1px solid red;
+	border-top :2px solid #d9534f;
 }
 nav:last-child{
 	margin-right: 0px;
 	padding-right :-16px;
+}
+nav a:hover{	
+	color: #d9534f;	
 }
 .thumbnail{
 	word-wrap: break-word;
 	min-height:250px;
 	border : 1px solid grey;
 	border-radius: 3px;
+}
+#navForm{
+	margin-right: 115px;
+}
+#navForm input{
+	text-align: center;
+}
+#navForm input:focus{
+	border-color: #d9534f;
+}
+#footer{
+	font-size: 0.8em;
+	float: right;
 }

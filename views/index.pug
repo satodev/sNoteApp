@@ -12,29 +12,27 @@ body(ng-controller="sna_ctrl")
 		button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2') 
 			| &#9776; sNoteApp
 		div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
-			a.navbar-brand(class="container-fluid responsive-utilities-test visible-on", href='#') 
+			a.navbar-brand(class="container-fluid responsive-utilities-test visible-on", href='https://snoteapp.herokuapp.com') 
 				span.hidden-xs-down.not-visible sNoteApp
-			button.pull-xs-right.btn.btn-secondary.btn-md(type='button', data-toggle='modal', data-target='#myModal')
+			button.pull-xs-right.btn.btn-danger.btn-md(type='button', data-toggle='modal', data-target='#myModal')
 				| +
-			form.form-inline
+			form.form-inline#navForm
 				input.form-control(type='search', placeholder='Search in notes', ng-model="data")
 
 	#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
 		.modal-dialog(role='document')
 			.modal-content
-				.modal-header
+				.modal-body
 					button.close(type='button', data-dismiss='modal', aria-label='Close')
 						span(aria-hidden='true') x
 					h4#myModalLabel.modal-title Create New Note
-				.modal-body
 					form(class="form-horizontal", role="form")
 						input.form-control(ng-model="ptitle", type="text", placeholder="title") 
-						input.form-control(ng-model="ptext", type="text", placeholder="text")
+						textarea.form-control(ng-model="ptext", type="text", placeholder="text")
 				.modal-footer
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-					button.btn.btn-primary(type='button', data-dismiss='modal', ng-click="post(ptitle, ptext)") Save Note
+					button.btn.btn-danger(type='button', data-dismiss='modal', ng-click="post(ptitle, ptext)") Save Note
 
-	h1#main-title Get All the notes
 	.container
 		.col-sm-6.col-md-4(ng-repeat="i in obj | filter : data")
 			.thumbnail
@@ -50,8 +48,10 @@ body(ng-controller="sna_ctrl")
 							input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
 						a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
 					button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
-
-
+	nav.navbar.navbar-fixed-bottom.navbar-dark.bg-inverse
+		span#footer Made by 
+			a(href="http://satoru.fr/", style="color:#d9534f;") Satoru HEMMI
+			|  with node.js | express | mongodb | angularJs
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 	script(src="/node_modules/tether/dist/js/tether.js")
 	script(src="/node_modules/bootstrap/dist/js/bootstrap.js")
