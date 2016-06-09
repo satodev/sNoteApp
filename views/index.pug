@@ -9,30 +9,30 @@ html(ng-app="snoteapp", lang="en")
 		link(href="/views/css/style.css", rel="stylesheet")
 body(ng-controller="sna_ctrl")
 	nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
-			button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2')  
-				| &#9776; sNoteApp
-			div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
-				a.navbar-brand(class="row responsive-utilities-test visible-on", href='#') 
-					span.hidden-xs-down.not-visible sNoteApp
-				form.form-inline.pull-xs-left
-					input.form-control(type='search', placeholder='Search in notes', ng-model="data")
+		button.navbar-toggler.hidden-sm-up(type='button', data-toggle='collapse', data-target='#exCollapsingNavbar2') 
+			| &#9776; sNoteApp
+		div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
+			a.navbar-brand(class="container-fluid responsive-utilities-test visible-on", href='#') 
+				span.hidden-xs-down.not-visible sNoteApp
+			form.form-inline
+				input.form-control(type='search', placeholder='Search in notes', ng-model="data")
+	h1#main-title Get All the notes
+	.container
+		.col-sm-6.col-md-4(ng-repeat="i in obj | filter : data")
+			.thumbnail
+				.caption
+					span(style="display: none;", class="objId") {{i._id}}	 
+					h3 {{i.title}} 
+					p {{i.text}}
+					br 	
+					button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
+					div(ng-show="showData")
+						form(class="form-horizontal", role="form")
+							input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
+							input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
+						a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
+					button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
 
-	h1 Get All the notes
-	a(class="btn btn-primary", ng-click="get()") Click me to get notes
-	ul
-		li(ng-repeat="i in obj | filter : data")
-			span(style="display:none", class="objId") {{i._id}}
-			h1 {{i.title}}
-			p {{i.text}}
-			button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
-			div(ng-show="showData")
-				form(class="form-horizontal", role="form")
-					input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
-					input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
-				a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
-			button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
-	div
-		h1 Post a notes
 		input(ng-model="ptitle", type="text", placeholder="title") 
 		input(ng-model="ptext", type="text", placeholder="text")
 		button(type="button", class="btn btn-primary", ng-click="post(ptitle, ptext)") Click me to Post notes

@@ -1,3 +1,19 @@
 html,body{
-	border-top: 1px solid red;
+}
+body{
+	padding-top: 55px;
+}
+nav{
+	text-align: center;
+	border-top :1px solid red;
+}
+nav:last-child{
+	margin-right: 0px;
+	padding-right :-16px;
+}
+.thumbnail{
+	word-wrap: break-word;
+	min-height:250px;
+	border : 1px solid grey;
+	border-radius: 3px;
 }
