@@ -14,8 +14,26 @@ body(ng-controller="sna_ctrl")
 		div#exCollapsingNavbar2.collapse.navbar-toggleable-xs
 			a.navbar-brand(class="container-fluid responsive-utilities-test visible-on", href='#') 
 				span.hidden-xs-down.not-visible sNoteApp
+			button.pull-xs-right.btn.btn-secondary.btn-md(type='button', data-toggle='modal', data-target='#myModal')
+				| +
 			form.form-inline
 				input.form-control(type='search', placeholder='Search in notes', ng-model="data")
+
+	#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true') x
+					h4#myModalLabel.modal-title Create New Note
+				.modal-body
+					form(class="form-horizontal", role="form")
+						input.form-control(ng-model="ptitle", type="text", placeholder="title") 
+						input.form-control(ng-model="ptext", type="text", placeholder="text")
+				.modal-footer
+					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+					button.btn.btn-primary(type='button', data-dismiss='modal', ng-click="post(ptitle, ptext)") Save Note
+
 	h1#main-title Get All the notes
 	.container
 		.col-sm-6.col-md-4(ng-repeat="i in obj | filter : data")
@@ -33,9 +51,6 @@ body(ng-controller="sna_ctrl")
 						a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
 					button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
 
-		input(ng-model="ptitle", type="text", placeholder="title") 
-		input(ng-model="ptext", type="text", placeholder="text")
-		button(type="button", class="btn btn-primary", ng-click="post(ptitle, ptext)") Click me to Post notes
 
 	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 	script(src="/node_modules/tether/dist/js/tether.js")
