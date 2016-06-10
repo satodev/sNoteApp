@@ -48,6 +48,20 @@ body(ng-controller="sna_ctrl")
 							input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
 						a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
 					button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
+	.flex-container
+		div(ng-repeat="i in obj | filter : data")
+			span(style="display:none;", class="objId") {{i._id}}
+			h3 {{i.title}}
+			p {{i.text}}
+			br 	
+			button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
+			div(ng-show="showData")
+				form(class="form-horizontal", role="form")
+					input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
+					input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
+				a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
+			button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
+			
 	nav.navbar.navbar-fixed-bottom.navbar-dark.bg-inverse
 		span#footer Made by 
 			a(href="http://satoru.fr/", style="color:#d9534f;") Satoru HEMMI

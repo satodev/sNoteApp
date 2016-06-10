@@ -34,3 +34,22 @@ nav a:hover{
 	font-size: 0.8em;
 	float: right;
 }
+/*
+	 Flex 
+*/
+.flex-container{
+	width: 100%;
+	padding: 20px;
+	display:flex;
+	flex-flow: row wrap;
+	margin: 0 auto;
+	justify-content:space-around;
+	align-content:flex-start;
+}
+.flex-container > *{
+	width: 250px;
+	margin: 1px
+	flex-grow: 1;
+	border : 1px solid red;
+	word-wrap: break-word;
+}
