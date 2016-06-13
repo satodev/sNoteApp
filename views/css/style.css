@@ -38,18 +38,33 @@ nav a:hover{
 	 Flex 
 */
 .flex-container{
-	width: 100%;
-	padding: 20px;
 	display:flex;
 	flex-flow: row wrap;
-	margin: 0 auto;
-	justify-content:space-around;
 	align-content:flex-start;
 }
 .flex-container > *{
-	width: 250px;
-	margin: 1px
-	flex-grow: 1;
-	border : 1px solid red;
+	padding: 10px;
 	word-wrap: break-word;
+}
+.flex-container h3{
+	border-top: 1px solid red;	
+}
+.btn-edit{
+	float: right;
+}
+.btn-edit:hover{
+	color: #d9534f;	
+	text-decoration: underline;
+	cursor:pointer;
+}
+.btn-delete:hover{
+	color: #d9534f;	
+	text-decoration: underline;
+	cursor: pointer;
+}
+.btn-delete{
+	font-size: 1.2em;
+	margin-top: -3px;
+	float: right;
+	margin-left: 10px;
 }

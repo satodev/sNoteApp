@@ -1,5 +1,5 @@
 doctype html
-html(ng-app="snoteapp", lang="en")
+html(ng-app="snoteapp", lang="en", ng-cloak)
 	head
 		title sNoteApp
 		meta(charset="utf-8")
@@ -33,34 +33,12 @@ body(ng-controller="sna_ctrl")
 					button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 					button.btn.btn-danger(type='button', data-dismiss='modal', ng-click="post(ptitle, ptext)") Save Note
 
-	.container
-		.col-sm-6.col-md-4(ng-repeat="i in obj | filter : data")
-			.thumbnail
-				.caption
-					span(style="display: none;", class="objId") {{i._id}}	 
-					h3 {{i.title}} 
-					p {{i.text}}
-					br 	
-					button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
-					div(ng-show="showData")
-						form(class="form-horizontal", role="form")
-							input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
-							input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
-						a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
-					button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
-	.flex-container
-		div(ng-repeat="i in obj | filter : data")
+	.flex-container.container
+		div(class="col-sm-6 col-md-4", ng-repeat="i in obj | filter : data")
+			span(snadir)
 			span(style="display:none;", class="objId") {{i._id}}
 			h3 {{i.title}}
 			p {{i.text}}
-			br 	
-			button(type="button", class="btn btn-warning", ng-click="showData = !showData") Edit The post
-			div(ng-show="showData")
-				form(class="form-horizontal", role="form")
-					input(type="text",class="form-control", ng-model="utitle", placeholder="{{i.title}}") 
-					input(type="text" ,class="form-control", ng-model="utext", placeholder="{{i.text}}")
-				a(href="#" class="btn btn-primary", ng-click="update(i._id, utitle, utext)") Update
-			button(type="button", class="btn btn-danger", ng-click="remove(i._id)") Delete Post
 			
 	nav.navbar.navbar-fixed-bottom.navbar-dark.bg-inverse
 		span#footer Made by 
@@ -72,3 +50,4 @@ body(ng-controller="sna_ctrl")
 	script(src="/node_modules/angular/angular.js")
 	script(src="/views/js/snoteapp.js")
 	script(src="/views/js/dataobj.js")
+	script(src="/views/js/directives.js")

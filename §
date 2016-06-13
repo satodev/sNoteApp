@@ -1,0 +1,42 @@
+app.directive('snadir', ()=>{
+	return {
+		restrict :'AEC',
+		template : '<a addupdatebutton href="#" ng-click="edit($event)">Edit</a>'
+	}
+});
+app.directive('addupdatebutton', ($compile)=>{
+	return (scope, element, attr)=>{
+		element.bind('click', ($event)=>{
+			var container = $event.currentTarget.parentNode.parentNode;
+			var btn_value = $event.currentTarget.innerHTML;
+			if(btn_value == 'Edit'){
+				console.log('edit mode');
+				var titleElem = container.getElementsByTagName('h3')[0];
+				var titleValue = titleElem.innerHTML;
+				var textElem = container.getElementsByTagName('p')[0];
+				var textValue = textElem.innerHTML;
+				var inputTitle = document.createElement('input');
+				inputTitle.setAttribute('name', 'iTitle');
+				inputTitle.setAttribute('placeholder', titleValue);
+				var inputText = document.createElement('input');
+				inputText.setAttribute('name', 'iText');
+				inputText.setAttribute('placeholder', textValue);
+				var iTitle = $compile(inputTitle)(scope);
+				titleElem.parentNode.replaceChild(inputTitle, titleElem);
+				textElem.parentNode.replaceChild(inputText, textElem);
+				$event.currentTarget.innerHTML = 'Update';
+			}
+			if(btn_value == 'Update'){
+				//get object id (verif token)
+				var objId = container.getElementsByClassName('objId')[0].innerHTML;
+				console.log('update mode');
+				//change html tags to default
+				var titleInput = container.getElementsByTagName('input')[0];
+				var textInput = container.getElementsByTagName('input')[1];
+
+				$event.currentTarget.innerHTML = 'Edit';
+			}
+			//angular.element(container).append($compile('<div id="update">hello</div>')(scope));
+		});
+	}
+});
