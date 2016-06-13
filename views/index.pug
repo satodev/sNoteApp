@@ -34,7 +34,7 @@ body(ng-controller="sna_ctrl")
 					button.btn.btn-danger(type='button', data-dismiss='modal', ng-click="post(ptitle, ptext)") Save Note
 
 	.flex-container.container
-		div(class="col-sm-6 col-md-4", ng-repeat="i in obj | filter : data")
+		div(class="col-xs-12 col-sm-6 col-md-4", ng-repeat="i in obj | filter : data")
 			span(snadir)
 			span(style="display:none;", class="objId") {{i._id}}
 			h3 {{i.title}}
